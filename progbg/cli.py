@@ -2,7 +2,6 @@
 
 This module processes and handles all command line interface input
 and dispatches commands to the proper area
-
 """
 # pylint: disable-msg=E0611,E0401
 
@@ -11,6 +10,7 @@ from argparse import ArgumentParser
 
 from .core import execute_plan
 from .serve import create_server
+
 
 def cli_entry():
     """Main entry point for the command line interface"""
@@ -36,8 +36,6 @@ def cli_entry():
         action="store_true",
         help="Turns on printing within the run, init, and uninit methods provided by user")
 
-
-
     args = parser.parse_args()
     if not os.path.isfile(args.plan):
         print("Issue finding the plan.py file/")
@@ -45,7 +43,6 @@ def cli_entry():
 
     globs = execute_plan(args.plan, args)
 
-
     if args.p:
         create_server(globs['_sb_executions'], globs['_sb_graphs'],
-                      globs['_sb_figures'], os.path.abspath("graphs")).run(port = args.p)
+                      globs['_sb_figures'], os.path.abspath("graphs")).run(port=args.p)
